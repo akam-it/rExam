@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  type_id: 
+  exam_id: 
+  section_id: 
+  title: 
+  difficult: 
+  allow_mix: 
+  explanation: 
+
+two:
+  type_id: 
+  exam_id: 
+  section_id: 
+  title: 
+  difficult: 
+  allow_mix: 
+  explanation: 

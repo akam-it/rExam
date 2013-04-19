@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  category_id: 
+  title: 
+  number: 
+  pass_score: 
+  time_limit: 
+  description: 
+
+two:
+  category_id: 
+  title: 
+  number: 
+  pass_score: 
+  time_limit: 
+  description: 
