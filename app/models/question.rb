@@ -1,8 +1,20 @@
 class Question < ActiveRecord::Base
-  attr_accessible :allow_mix, :difficult, :exam_id, :explanation, :section_id, :title, :type_id
+  attr_accessible :type_id, :exam_id, :section_id, :title, :allow_mix, :difficult, :explanation
 
   belongs_to :type
   belongs_to :exam
   belongs_to :section
   has_many :answers
+
+  validates_associated  :type
+  validates_presence_of :type
+  validates_associated  :exam
+  validates_presence_of :exam
+  validates_associated  :section
+  validates_presence_of :section
+  validates :title, :presence => true,
+            :length => { :minimum => 3 }
+  validates :allow_mix, :inclusion => {:in => [true, false]}
+  validates :difficult, :presence => true,
+            :numericality => { :only_integer => true, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 5 }
 end
