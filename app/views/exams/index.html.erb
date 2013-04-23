@@ -1,0 +1,13 @@
+<h2><%= @title %></h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr><th>Vendor<th>Category<th>Number<th>Title
+  </thead>
+  <tbody>
+<% @exams.each do |exam| %>
+  <tr>
+    <td><%= exam.vendor.title %><td><%= exam.category.title %><td><%= exam.number %><td><%= link_to exam.title, exam_path(exam) %>
+<% end %>
+  <tbody>
+</table>

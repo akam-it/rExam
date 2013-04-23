@@ -11,21 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419124410) do
+ActiveRecord::Schema.define(:version => 20130422043557) do
 
   create_table "answers", :force => true do |t|
-    t.integer  "question_id"
-    t.string   "title"
-    t.boolean  "is_correct"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "question_id",                    :null => false
+    t.string   "title",                          :null => false
+    t.boolean  "is_correct",  :default => false, :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   add_index "answers", ["is_correct"], :name => "index_answers_on_is_correct"
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
 
   create_table "categories", :force => true do |t|
-    t.string   "title"
+    t.string   "title",      :null => false
     t.string   "ancestry"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -34,31 +34,30 @@ ActiveRecord::Schema.define(:version => 20130419124410) do
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
 
   create_table "exams", :force => true do |t|
-    t.integer  "category_id"
-    t.string   "title"
-    t.string   "number"
-    t.integer  "pass_score"
-    t.integer  "time_limit"
+    t.integer  "category_id",                  :null => false
+    t.integer  "vendor_id",                    :null => false
+    t.string   "title",                        :null => false
+    t.string   "number",                       :null => false
+    t.integer  "pass_score",  :default => 600, :null => false
+    t.integer  "time_limit",  :default => 120, :null => false
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
-  add_index "exams", ["category_id"], :name => "index_exams_on_category_id"
+  add_index "exams", ["category_id", "vendor_id"], :name => "index_exams_on_category_id_and_vendor_id"
 
   create_table "questions", :force => true do |t|
-    t.integer  "type_id"
-    t.integer  "exam_id"
+    t.integer  "type_id",                       :null => false
     t.integer  "section_id"
-    t.string   "title"
-    t.integer  "difficult"
-    t.boolean  "allow_mix"
+    t.string   "title",                         :null => false
+    t.integer  "difficult",   :default => 5,    :null => false
+    t.boolean  "allow_mix",   :default => true, :null => false
     t.string   "explanation"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
-  add_index "questions", ["exam_id"], :name => "index_questions_on_exam_id"
   add_index "questions", ["section_id"], :name => "index_questions_on_section_id"
   add_index "questions", ["type_id"], :name => "index_questions_on_type_id"
 
@@ -76,8 +75,8 @@ ActiveRecord::Schema.define(:version => 20130419124410) do
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
   create_table "sections", :force => true do |t|
-    t.integer  "exam_id"
-    t.string   "title"
+    t.integer  "exam_id",    :null => false
+    t.string   "title",      :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -85,7 +84,7 @@ ActiveRecord::Schema.define(:version => 20130419124410) do
   add_index "sections", ["exam_id"], :name => "index_sections_on_exam_id"
 
   create_table "types", :force => true do |t|
-    t.string   "title"
+    t.string   "title",      :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -107,5 +106,11 @@ ActiveRecord::Schema.define(:version => 20130419124410) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "vendors", :force => true do |t|
+    t.string   "title",      :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

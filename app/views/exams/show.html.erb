@@ -1,0 +1,18 @@
+<h2><%= @title %></h2>
+
+<table class="table table-striped">
+  <tbody>
+    <tr><th width=100>Vendor<td><%= @exam.vendor.title %>
+    <tr><th>Category<td><%= @exam.category.title %>
+    <tr><th>Number<td><%= @exam.number %>
+    <tr><th>Description<td><%= @exam.description %>
+    <tr><th>Pass score<td><%= @exam.pass_score %>
+    <tr><th>Time limit<td><%= @exam.time_limit %> min.
+    <tr><th>Create date<td><%= @exam.created_at %>
+    <tr><th>Modify date<td><%= @exam.updated_at %>
+    <tr><th>Sections<td><%= @exam.sections.count %>
+    <tr><th>Questions<td><%= @exam.questions.count %>
+  </tbody>
+</table>
+
+<%= link_to "Start examination", prepare_exam_path, :class => "btn-block btn btn-large btn-primary" %>
