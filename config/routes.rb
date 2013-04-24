@@ -7,6 +7,7 @@ RExam::Application.routes.draw do
     get 'prepare', :on => :member
     get 'start', :on => :member
   end
+  match "/exams/:id/start/:question" => "exams#start", :constraints => { :id => /\d+/, :question => /\d+/ }
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

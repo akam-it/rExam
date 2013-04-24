@@ -1,4 +1,22 @@
-<h2><%= @title %></h2>
+<h3><%= @title %></h3>
+<div class="well">
+  <b>Question <%= @current_que %> of <%= @questions.count %></b><br />
+  <%= @questions.first.title %>
+</div>
 <hr>
 
-<hr>
+<%= form_tag(start_exam_path, :method => "get") do %>
+  <% @questions[@current_que-1].answers.each do |answer| %>
+    <%= radio_button_tag "answer", answer.id %> <%= label_tag "answer_#{answer.id}", answer.title %><br />
+  <% end %>
+
+<br />
+
+<% if @current_que > 1 %>
+  <%= link_to "<<< Prev", start_exam_path+"/#{@current_que-1}", :class => "btn btn-large btn-primary" %>
+<% end %>
+<% if @current_que < @questions.count %>
+  <%= link_to "Next >>>", start_exam_path+"/#{@current_que+1}", :class => "btn btn-large btn-primary" %>
+<% end %>
+<%= submit_tag "Finish", :class => "btn btn-large btn-primary" %>
+<% end %>
