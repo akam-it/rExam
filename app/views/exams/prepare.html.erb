@@ -1,6 +1,6 @@
 <h2><%= @title %></h2>
 
-<%= form_tag(start_exam_path, :method => "get") do %>
+<%= form_tag(start_exam_path, :method => "post") do %>
 
 Выбрать вопросы из определенной секции<br />
 <% @exam.sections.each do |section| %>

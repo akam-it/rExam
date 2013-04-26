@@ -1,0 +1,61 @@
+<h2 style="text-align:center;"><%= @title %></h2>
+<h4 style="text-align:center;"><%= @exam.number %>. <%= @exam.title %></h4>
+<dl class="dl-horizontal">
+  <dt>Имя, фамилия</dt>
+  <dd>Аноним</dd>
+  <dt>Дата сдачи</dt>
+  <dd><%= Time.now %></dd>
+  <dt>Продолжительность</dt>
+  <dd>00:00:00 минут</dd>
+</dl>
+
+<dl class="dl-horizontal">
+  <dt>Проходной балл</dt>
+  <dd><%= @exam.pass_score %></dd>
+  <dt>Ваш балл</dt>
+  <dd>TODO</dd>
+  <dt>Результат</dt>
+  <dd>TODO</dd>
+</dl>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Секция
+      <th>Кол-во вопросов
+      <th>Процент правильных
+    </tr>
+  </thead>
+  <tbody>
+<% @exam.sections.each do |section| %>
+  <tr>
+    <td><%= section.title %>
+    <td><%= section.questions.count %>
+    <td>#
+<% end %>
+  </tbody>
+</table>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th># Вопроса
+      <th># Real que
+      <th># Ответа
+      <th># Секции
+      <th>True/False
+  </thead>
+<tbody>
+<% session[:answer].each_with_index do |q,i| %>
+  <tr>
+    <td><%= i %>
+    <td>---
+    <td><%= q %>
+    <th>---
+    <th>---
+  </tr>
+<% end %>
+</tbody>
+</table>
+
+<%= session %>

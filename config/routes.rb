@@ -5,9 +5,11 @@ RExam::Application.routes.draw do
   resources :exams
   resources :exams do
     get 'prepare', :on => :member
-    get 'start', :on => :member
+    post 'start', :on => :member
+    post 'finish', :on => :member
   end
-  match "/exams/:id/start/:question" => "exams#start", :constraints => { :id => /\d+/, :question => /\d+/ }
+  match "/exams/:id/start/:question" => "exams#start", :constraints => { :id => /\d+/, :question => /\d+/ }, :method => :post
+  match "/exams/:id/answer/:question" => "exams#answer", :method => :post
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
