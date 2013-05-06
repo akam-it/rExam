@@ -5,5 +5,5 @@ class Category < ActiveRecord::Base
   has_many :exams
 
   validates :title, :presence => true,
-            :length => { :minimum => 3 }
+            :length => { :minimum => 2 }
 end

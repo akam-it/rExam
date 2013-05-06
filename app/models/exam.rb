@@ -16,7 +16,7 @@ class Exam < ActiveRecord::Base
   validates :number, :presence => true,
             :length => { :maximum => 50 }
   validates :pass_score, :presence => true,
-            :numericality => { :only_integer => true, :greater_than => 100, :less_than => 9999 }
+            :numericality => { :only_integer => true, :greater_than => 10, :less_than => 9999 }
   validates :time_limit, :presence => true,
             :numericality => { :only_integer => true, :greater_than => 0, :less_than => 300 }
 end

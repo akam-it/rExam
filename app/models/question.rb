@@ -3,6 +3,7 @@ class Question < ActiveRecord::Base
 
   belongs_to :type
   belongs_to :section
+  has_many   :results
   has_many   :answers
 
   validates_associated  :type

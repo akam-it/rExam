@@ -6,7 +6,7 @@ class Answer < ActiveRecord::Base
   validates_associated :question
   validates_presence_of :question
   validates :title, :presence => true,
-            :length => { :minimum => 3 }
+            :length => { :minimum => 1 }
   validates :is_correct, :inclusion => {:in => [true, false]}
 
 end

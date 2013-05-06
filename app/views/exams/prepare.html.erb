@@ -4,9 +4,9 @@
 
 Выбрать вопросы из определенной секции<br />
 <% @exam.sections.each do |section| %>
-  <%= check_box_tag("section-"+section.id.to_s, nil, true) %>
-  <%= label_tag("section-"+section.id.to_s, section.title) %>
-  <br />
+  <label class="checkbox">
+    <%= check_box_tag("section-"+section.id.to_s, nil, true) %> <%= section.title %>
+  </label>
 <% end %>
 
 <p><p><%= submit_tag "OK", :class => "btn btn-large btn-primary" %>

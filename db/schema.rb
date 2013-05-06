@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130422043557) do
+ActiveRecord::Schema.define(:version => 20130430103510) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id",                    :null => false
@@ -73,6 +73,25 @@ ActiveRecord::Schema.define(:version => 20130422043557) do
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
+
+  create_table "results", :force => true do |t|
+    t.string  "session_id"
+    t.integer "user_id"
+    t.integer "exam_id"
+    t.integer "question_id"
+    t.integer "try"
+    t.string  "answer"
+    t.boolean "is_correct"
+    t.integer "score"
+  end
+
+  add_index "results", ["exam_id"], :name => "index_results_on_exam_id"
+  add_index "results", ["is_correct"], :name => "index_results_on_is_correct"
+  add_index "results", ["question_id"], :name => "index_results_on_question_id"
+  add_index "results", ["score"], :name => "index_results_on_score"
+  add_index "results", ["session_id"], :name => "index_results_on_session_id"
+  add_index "results", ["try"], :name => "index_results_on_try"
+  add_index "results", ["user_id"], :name => "index_results_on_user_id"
 
   create_table "sections", :force => true do |t|
     t.integer  "exam_id",    :null => false

@@ -1,11 +1,12 @@
 <div class="well">
-  <b>Question <%= @current_que %> of <%= @questions.count %></b><br />
-  <%= @questions.first.title %>
+  <b>Question <%= @current_que %> of <%= session[:qty] %></b><br />
+  <%= @question.title %>
 </div>
 
-<% @questions[@current_que-1].answers.each do |answer| %>
-  <%= radio_button_tag "question-#{@current_que}", answer.id, (session[:answer].present? and session[:answer][@current_que] == answer.id) %>
-  <%= label_tag "question-#{@current_que}_#{answer.id}", answer.title, :class => "radio" %><br />
+<% @answers.each do |answer| %>
+  <label class="radiobutton">
+    <%= radio_button_tag "question-#{@current_que}", answer.id, (session[:answer].present? and session[:answer][@current_que] == answer.id) %> <%= answer.title %>
+  </label>
 <% end %>
 
 <br />
@@ -15,5 +16,6 @@
 <br />
 
 <div style="float:left;"><%= button_to "<<< Prev", start_exam_path+"/#{@current_que-1}", :remote => true, :class => "btn btn-large btn-primary", :disabled => !(@current_que > 1) %></div>
-<div style="float:left;"><%= button_to "Next >>>", start_exam_path+"/#{@current_que+1}", :remote => true, :class => "btn btn-large btn-primary", :disabled => !(@current_que < @questions.count) %></div>
+<div style="float:left;"><%= button_to "Next >>>", start_exam_path+"/#{@current_que+1}", :remote => true, :class => "btn btn-large btn-primary", :disabled => !(@current_que < session[:qty]) %></div>
 <div style="float:right;"><%= button_to "Finish", finish_exam_path, :class => "btn btn-large btn-primary" %></div><div style="clear:both;"></div>
+
