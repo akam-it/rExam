@@ -4,9 +4,18 @@
 </div>
 
 <% @answers.each do |answer| %>
-  <label class="radiobutton">
-    <%= radio_button_tag "question-#{@current_que}", answer.id, (session[:answer].present? and session[:answer][@current_que] == answer.id) %> <%= answer.title %>
-  </label>
+  <% case answer.question.type.id
+  when 1 %>
+    <label class="radiobutton">
+      <%= radio_button_tag "question-#{@current_que}", answer.id, (session[:answer].present? and session[:answer][@current_que] == answer.id) %> <%= answer.title %>
+    </label>
+  <% when 2 %>
+    <label class="checkbox">
+      <%= check_box_tag "question-#{@current_que}", answer.id, (session[:answer].present? and session[:answer][@current_que] == answer.id) %> <%= answer.title %>
+    </label>
+  <% else %>
+    <h1>Unknown question type!</h1>
+  <% end %>
 <% end %>
 
 <br />
