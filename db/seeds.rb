@@ -190,3 +190,41 @@ Answer.create(:question_id => 26, :title => 'ядро', :is_correct => true)
 Answer.create(:question_id => 26, :title => 'серверное ПО', :is_correct => false)
 Answer.create(:question_id => 26, :title => 'Gnome или KDE', :is_correct => false)
 Answer.create(:question_id => 26, :title => 'пользовательское ПО', :is_correct => false)
+
+Question.create(:type_id => 2, :section_id => 1, :title => 'Какие из приведенных параметров можно передать ядру для загрузки системы в однопользовательский режим?', :difficult => 5, :allow_mix => true, :explanation => '')
+Answer.create(:question_id => 27, :title => 'single', :is_correct => true)
+Answer.create(:question_id => 27, :title => 'init=1', :is_correct => false)
+Answer.create(:question_id => 27, :title => 'singleuser', :is_correct => false)
+Answer.create(:question_id => 27, :title => 'root', :is_correct => false)
+
+Question.create(:type_id => 2, :section_id => 1, :title => 'Какой командой можно посмотреть список устройств на PCI шине?', :difficult => 5, :allow_mix => true, :explanation => '')
+Answer.create(:question_id => 28, :title => 'lspci', :is_correct => true)
+Answer.create(:question_id => 28, :title => 'ls pci', :is_correct => false)
+Answer.create(:question_id => 28, :title => 'ls | grep pci', :is_correct => false)
+Answer.create(:question_id => 28, :title => 'pcimodules', :is_correct => false)
+
+Question.create(:type_id => 2, :section_id => 1, :title => 'Как можно просмотреть состояние использования оперативной и виртуальной памяти?', :difficult => 5, :allow_mix => true, :explanation => '')
+Answer.create(:question_id => 29, :title => 'free', :is_correct => true)
+Answer.create(:question_id => 29, :title => 'cat /proc/meminfo', :is_correct => true)
+Answer.create(:question_id => 29, :title => 'usage', :is_correct => false)
+Answer.create(:question_id => 29, :title => 'memusage', :is_correct => false)
+Answer.create(:question_id => 29, :title => 'df', :is_correct => false)
+Answer.create(:question_id => 29, :title => 'memory', :is_correct => false)
+Answer.create(:question_id => 29, :title => 'show memory', :is_correct => false)
+Answer.create(:question_id => 29, :title => 'ram', :is_correct => false)
+Answer.create(:question_id => 29, :title => 'mem', :is_correct => false)
+
+Question.create(:type_id => 2, :section_id => 1, :title => 'Как может называться первый жесткий диск в GNU/Linux?', :difficult => 5, :allow_mix => true, :explanation => '')
+Answer.create(:question_id => 30, :title => '/dev/sda', :is_correct => true)
+Answer.create(:question_id => 30, :title => '/dev/hda', :is_correct => true)
+Answer.create(:question_id => 30, :title => '/boot/hda', :is_correct => false)
+Answer.create(:question_id => 30, :title => '/dev/mbr', :is_correct => false)
+
+Question.create(:type_id => 2, :section_id => 1, :title => 'Какой результат выполнения bash скрипта, содержащего следующую последовательность команд:
+                #!/bin/bash
+                #vаr=">filе"
+                #echo а ${var} (TODO: Сделать форматирование вопросов/ответов)', :difficult => 5, :allow_mix => true, :explanation => '')
+Answer.create(:question_id => 31, :title => 'Будет выдано сообщение о синтаксической ошибке', :is_correct => true)
+Answer.create(:question_id => 31, :title => 'На терминале будет предложено ввести значение переменной a', :is_correct => false)
+Answer.create(:question_id => 31, :title => 'На терминал будет выведен результат a >file', :is_correct => false)
+Answer.create(:question_id => 31, :title => 'Символ а будет записан в файл file', :is_correct => false)

@@ -34,9 +34,18 @@ class ExamsController < ApplicationController
 
   def answer
     # TODO: check parameters
+    # Текущий вопрос, если неверно указан, то -  или первый или последний
     current_que = params[:question].to_i
-    answer = params[:answer].to_i
-    session[:answer][current_que] = answer
+    current_que = 1 if current_que <= 0
+    current_que = session[:qty] if current_que > session[:qty]
+    question = Question.find(session[:random_ids][current_que-1])
+    answer = params[:answer]
+    case question.type.id
+    when 1
+      session[:answer][current_que] = answer.to_i
+    when 2
+      session[:answer][current_que] = answer.map(&:to_i)
+    end
   end
 
   def start
@@ -54,6 +63,7 @@ class ExamsController < ApplicationController
     @question = Question.find(session[:random_ids][@current_que-1])
     @answers = @question.answers
     @answers.shuffle! if @question.allow_mix?
+
   end
 
   def finish
@@ -76,7 +86,8 @@ class ExamsController < ApplicationController
       session[:random_ids].each_with_index do |id, index|
         try = session[:try]
         answer = session[:answer][index+1]
-        isCorrect = (Question.find(id).answers.where(:is_correct => true)[0].id == answer.to_i)
+        isCorrect = isCorrect(id, answer)
+        puts "isCORR1 = #{isCorrect}"
         score = isCorrect ? Question.find(id).difficult : 0
         @score += score
         @correctCount += 1 if isCorrect
@@ -88,5 +99,19 @@ class ExamsController < ApplicationController
       @result = Result.where(:session_id => session[:session_id], :user_id => 0, :exam_id => params[:id], :try => session[:try])
     end
     @isPass = @score >= @exam.pass_score
+  end
+
+
+  private
+
+  def isCorrect(question_id, answer)
+    question_type = Question.find(question_id).type.id
+    case question_type
+    when 1
+      !answer.nil? ? Question.find(question_id).answers.where(:is_correct => true)[0].id == answer.to_i : false
+    when 2
+      #puts "ANS = #{answer} isCOR == #{Question.find(question_id).answers.where(:is_correct => true).pluck(:id) == answer}"
+      !answer.nil? ? Question.find(question_id).answers.where(:is_correct => true).pluck(:id).sort == answer.sort : false
+    end
   end
 end

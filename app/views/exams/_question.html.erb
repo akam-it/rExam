@@ -3,28 +3,34 @@
   <%= @question.title %>
 </div>
 
+<form>
 <% @answers.each do |answer| %>
   <% case answer.question.type.id
   when 1 %>
     <label class="radiobutton">
-      <%= radio_button_tag "question-#{@current_que}", answer.id, (session[:answer].present? and session[:answer][@current_que] == answer.id) %> <%= answer.title %>
+      <%= radio_button_tag "answer", answer.id, (session[:answer][@current_que].present? and session[:answer][@current_que] == answer.id) %> <%= answer.title %>
     </label>
   <% when 2 %>
     <label class="checkbox">
-      <%= check_box_tag "question-#{@current_que}", answer.id, (session[:answer].present? and session[:answer][@current_que] == answer.id) %> <%= answer.title %>
+      <%= check_box_tag "answer[]", answer.id, (session[:answer][@current_que].present? and session[:answer][@current_que].include? answer.id) %> <%= answer.title %>
     </label>
   <% else %>
     <h1>Unknown question type!</h1>
   <% end %>
 <% end %>
+</form>
 
-<br />
-<div id="test">
-  <%= session %>
-</div>
 <br />
 
 <div style="float:left;"><%= button_to "<<< Prev", start_exam_path+"/#{@current_que-1}", :remote => true, :class => "btn btn-large btn-primary", :disabled => !(@current_que > 1) %></div>
 <div style="float:left;"><%= button_to "Next >>>", start_exam_path+"/#{@current_que+1}", :remote => true, :class => "btn btn-large btn-primary", :disabled => !(@current_que < session[:qty]) %></div>
 <div style="float:right;"><%= button_to "Finish", finish_exam_path, :class => "btn btn-large btn-primary" %></div><div style="clear:both;"></div>
 
+<div class="accordion-heading">
+  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Information</a>
+</div>
+<div id="collapseOne" class="accordion-body collapse">
+  <div class="accordion-inner">
+    <%= session %>
+  </div>
+</div>

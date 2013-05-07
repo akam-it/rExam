@@ -78,16 +78,22 @@
   <tr>
     <td><%= i+1 %>
     <td title="<%= r.question.title %>"><%= r.question_id %>
-    <td title="<%= r.answer.nil? ? "нет ответа" : Answer.find(r.answer.to_i).title %>"><%= r.answer.nil? ? "<span class='label label-important'>Нет ответа</span>".html_safe : r.answer %>
+    <td title="<%= r.answer.nil? ? "нет ответа" : "" %>"><%= r.answer.nil? ? "<span class='label label-important'>Нет ответа</span>".html_safe : r.answer %>
     <td><%= r.question.section.title %>
-    <td><%= (Question.find(r.question_id).answers.where(:is_correct => true)[0].id == r.answer.to_i) ? "<span class='label label-success'>Верно</span>".html_safe : "<span class='label label-important'>Неверно</span>".html_safe %>
+    <td><%= r.is_correct ? "<span class='label label-success'>Верно</span>".html_safe : "<span class='label label-important'>Неверно</span>".html_safe %>
     <td><%= r.score %>
   </tr>
 <% end %>
 </tbody>
 </table>
 
-<%= p @result.inspect %>
-<br />
-<br />
-<%= session %>
+
+<div class="accordion-heading">
+  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Information</a>
+</div>
+<div id="collapseOne" class="accordion-body collapse">
+  <div class="accordion-inner">
+    <%= p @result.inspect %><br /><br />
+    <%= session %>
+  </div>
+</div>

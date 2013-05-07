@@ -2,13 +2,14 @@ jQuery(function($) {
 
   $("#question").html("<%= j render ("question") %>");
 
-  $('input').change(function() {
+  $('form').change(function() {
+    console.log( $(this).serialize() );
     var key = $(this).attr("name");
     var data = $(this).attr("value");
     $.ajax({
       type: 'POST',
       url: '/exams/1/answer/<%= @current_que %>',
-      data: { answer : data },
+      data: $(this).serialize(),
       dataType: 'html',
     })
   });
