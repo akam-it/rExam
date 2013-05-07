@@ -219,12 +219,3 @@ Answer.create(:question_id => 30, :title => '/dev/sda', :is_correct => true)
 Answer.create(:question_id => 30, :title => '/dev/hda', :is_correct => true)
 Answer.create(:question_id => 30, :title => '/boot/hda', :is_correct => false)
 Answer.create(:question_id => 30, :title => '/dev/mbr', :is_correct => false)
-
-Question.create(:type_id => 2, :section_id => 1, :title => 'Какой результат выполнения bash скрипта, содержащего следующую последовательность команд:
-                #!/bin/bash
-                #vаr=">filе"
-                #echo а ${var} (TODO: Сделать форматирование вопросов/ответов)', :difficult => 5, :allow_mix => true, :explanation => '')
-Answer.create(:question_id => 31, :title => 'Будет выдано сообщение о синтаксической ошибке', :is_correct => true)
-Answer.create(:question_id => 31, :title => 'На терминале будет предложено ввести значение переменной a', :is_correct => false)
-Answer.create(:question_id => 31, :title => 'На терминал будет выведен результат a >file', :is_correct => false)
-Answer.create(:question_id => 31, :title => 'Символ а будет записан в файл file', :is_correct => false)

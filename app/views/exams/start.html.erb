@@ -8,7 +8,7 @@
 </script>
 -->
 <h3><%= @title %></h3>
-
+<div title="<%= session[:started_at] %>" id="countdown" class="pull-right well well-small" style="color: black; font-weight:bold;"></div>
 <div id="question">
   <%= render ("question") %>
 </div

@@ -14,6 +14,7 @@ class ExamsController < ApplicationController
   def prepare
     session[:answer] = []
     session[:random_ids] = []
+    session[:started_at] = Time.now
     @title = "Choose settings"
     @exam = Exam.find(params[:id])
     # Количество задаваемых вопросов - 30 или кол-во вопросов в экзамене
@@ -58,6 +59,8 @@ class ExamsController < ApplicationController
     @current_que = params[:question].to_i
     @current_que = 1 if @current_que <= 0
     @current_que = session[:qty] if @current_que > session[:qty]
+    session[:next] = @current_que + 1
+    session[:prev] = @current_que - 1
     # Заголовок
     @title = @exam.title
     @question = Question.find(session[:random_ids][@current_que-1])
