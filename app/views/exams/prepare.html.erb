@@ -2,7 +2,6 @@
 
 <%= form_tag(start_exam_path, :method => "post") do %>
 
-Выбрать вопросы из определенной секции<br />
 <% @exam.sections.each do |section| %>
   <label class="checkbox">
     <%= check_box_tag("section-"+section.id.to_s, nil, true) %> <%= section.title %>

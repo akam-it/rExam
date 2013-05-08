@@ -8,7 +8,8 @@ RExam::Application.routes.draw do
     post 'start', :on => :member
     post 'finish', :on => :member
   end
-  match "/exams/:id/start/:question" => "exams#start", :constraints => { :id => /\d+/, :question => /\d+/ }, :method => :post
+  #match "/exams/:id/start/:question" => "exams#start", :constraints => { :id => /\d+/, :question => /\d+/ }, :method => :post
+  match "/exams/:id/start/:question" => "exams#start", :constraints => { :id => /\d+/, :question => /.*/ }, :method => :post
   match "/exams/:id/answer/:question" => "exams#answer", :method => :post
 
   # The priority is based upon order of creation:

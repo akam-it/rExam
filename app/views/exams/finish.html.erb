@@ -31,7 +31,7 @@
   <dt>Дата сдачи</dt>
   <dd><%= Time.now %></dd>
   <dt>Продолжительность</dt>
-  <dd>00:00:00 минут</dd>
+  <dd><%= Time.at(session[:finish_at]).utc.strftime("%H:%M:%S") %></dd>
   <dt>Попытка</dt>
   <dd><%= session[:try] %></dd>
 </dl>

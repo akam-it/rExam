@@ -19,6 +19,12 @@ jQuery(function($) {
   }, 1000 * 60 * 1);
 
   var newDate = new Date(<%= (session[:started_at]+@exam.time_limit.minutes).strftime("%Y, %m-1, %d, %H, %M, %S") %>);
-  $('#countdown').countdown({until: newDate, compact: true, format: 'HMs', description: ''});
+  $('#countdown').countdown({
+    until: newDate,
+    compact: true,
+    format: 'HMs',
+    description: '',
+    onExpiry: function() { alert('Время вышло!'); document.getElementById('finish').click(); }
+  });
 
 });

@@ -24,7 +24,7 @@
 
 <div style="float:left;"><%= button_to "<<< Prev", start_exam_path+"/#{@current_que-1}", :remote => true, :class => "btn btn-large btn-primary", :disabled => !(@current_que > 1) %></div>
 <div style="float:left;"><%= button_to "Next >>>", start_exam_path+"/#{@current_que+1}", :remote => true, :class => "btn btn-large btn-primary", :disabled => !(@current_que < session[:qty]) %></div>
-<div style="float:right;"><%= button_to "Finish", finish_exam_path, :class => "btn btn-large btn-primary" %></div><div style="clear:both;"></div>
+<div style="float:right;"><%= button_to "Finish", finish_exam_path, :id => "finish", :class => "btn btn-large btn-primary" %></div><div style="clear:both;"></div>
 
 <div class="accordion-heading">
   <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Information</a>

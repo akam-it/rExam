@@ -15,7 +15,8 @@ class ExamsController < ApplicationController
     session[:answer] = []
     session[:random_ids] = []
     session[:started_at] = Time.now
-    @title = "Choose settings"
+    session[:finish_at] = nil
+    @title = "Выберите секции"
     @exam = Exam.find(params[:id])
     # Количество задаваемых вопросов - 30 или кол-во вопросов в экзамене
     qty = 30
@@ -59,14 +60,11 @@ class ExamsController < ApplicationController
     @current_que = params[:question].to_i
     @current_que = 1 if @current_que <= 0
     @current_que = session[:qty] if @current_que > session[:qty]
-    session[:next] = @current_que + 1
-    session[:prev] = @current_que - 1
     # Заголовок
     @title = @exam.title
     @question = Question.find(session[:random_ids][@current_que-1])
     @answers = @question.answers
     @answers.shuffle! if @question.allow_mix?
-
   end
 
   def finish
@@ -99,6 +97,7 @@ class ExamsController < ApplicationController
       end
       session[:score] = @score
       session[:correctCount] = @correctCount
+      session[:finish_at] = (Time.now - session[:started_at]).round
       @result = Result.where(:session_id => session[:session_id], :user_id => 0, :exam_id => params[:id], :try => session[:try])
     end
     @isPass = @score >= @exam.pass_score
