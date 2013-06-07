@@ -1,12 +1,12 @@
 # encoding: UTF-8
 
-User.create(:email => 'admin@example.com', :password => 'password', :password_confirmation => 'password')
+User.create(:email => 'admin@example.com', :username => "akam", :admin => true, :password => 'password', :password_confirmation => 'password')
 
-["LPI", "Cisco", "RedHat", "Microsoft"].each do |l|
+["No vendor", "LPI", "Cisco", "RedHat", "Microsoft"].each do |l|
   Vendor.create!(:title => "#{l}")
 end
 
-["Linux administration", "Windows administration", "Networks"].each do |l|
+["No category", "Linux administration", "Windows administration", "Networks"].each do |l|
   Category.create!(:title => "#{l}")
 end
 
@@ -14,8 +14,8 @@ end
   Type.create!(:title => "#{l}")
 end
 
-Exam.create(:category_id => 1, :vendor_id => 1, :title => 'Основы администрирования Linux', :number => '001-001', :pass_score => 60, :time_limit => 120, :description => 'Основы администрирования Linux')
-Exam.create(:category_id => 2, :vendor_id => 4, :title => 'Second Exam', :number => '002-001', :pass_score => 90, :time_limit => 120, :description => 'Windows examination')
+Exam.create(:category_id => 1, :vendor_id => 1, :title => 'Основы администрирования Linux', :number => '001-001', :version => "1.0", :pass_score => 60, :time_limit => 120, :description => 'Основы администрирования Linux')
+Exam.create(:category_id => 2, :vendor_id => 4, :title => 'Second Exam', :number => '002-001', :version => "1.0", :pass_score => 90, :time_limit => 120, :description => 'Windows examination')
 
 ["Общая", "Управление процессами", "Файловая система", "Управление доступом", "Управление пользователями", "Драйверы и ядро", "Сетевые подключения"].each do |l|
   Section.create!(:exam_id => 1, :title => "#{l}")

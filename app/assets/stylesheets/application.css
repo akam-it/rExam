@@ -11,3 +11,17 @@
  *= require_self
  *= require_tree .
  */
+
+.nav > a {
+  color: #999;
+  text-decoration: none;
+}
+.nav > a:focus {
+  color: #999;
+  text-decoration: none;
+}
+
+.nav > a:hover {
+  color: #999;
+  text-decoration: none;
+}

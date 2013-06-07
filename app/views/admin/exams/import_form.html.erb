@@ -1,0 +1,11 @@
+<h2><%= @title %></h2>
+<div>
+  Поддерживается импорт эказменационных файлов Visual CertExam Suite (*.vce).
+  Множество экзаменов можно найти на сайте ExamCollection.com
+</div>
+<br><strong>Выберите импортирумый файл</strong>
+
+<%= form_tag(import_admin_exams_path, :multipart => true) do %>
+  <%= file_field_tag "vceFile" %>
+  <%= submit_tag "Отправить" %>
+<% end %>

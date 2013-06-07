@@ -34,4 +34,6 @@ RExam::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.log_level = :debug # In any environment initializer, or
 end

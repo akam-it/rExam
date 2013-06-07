@@ -1,0 +1,44 @@
+<%= form_for([:admin, @exam], :remote=>true, :html => { :class => "form-horizontal" } ) do |f| %>
+  <div class="control-group">
+    <%= f.label(:title, "Название", :class => "control-label") %>
+    <div class="controls">
+      <%= f.text_field(:title, :style => "background-color: transparent;", :class => "input-xxlarge") %>
+    </div>
+
+    <%= f.label(:number, "Номер", :class => "control-label") %>
+    <div class="controls">
+      <%= f.text_field(:number, :style => "background-color: transparent;") %>
+    </div>
+
+    <%= f.label(:version, "Версия", :class => "control-label") %>
+    <div class="controls">
+      <%= f.text_field(:version, :style => "background-color: transparent;") %>
+    </div>
+
+    <%= f.label(:pass_score, "Проходной балл", :class => "control-label") %>
+    <div class="controls">
+      <%= f.text_field(:pass_score, :style => "background-color: transparent;") %>
+    </div>
+
+    <%= f.label(:time_limit, "Лимит времени (минут)", :class => "control-label") %>
+    <div class="controls">
+      <%= f.text_field(:time_limit, :style => "background-color: transparent;") %>
+    </div>
+
+    <%= f.label(:vendor, "Вендор", :class => "control-label") %>
+    <div class="controls">
+      <%= f.select(:vendor_id, Vendor.all.map { |v| [v.title, v.id] }, :rows => 1, :style => "width:100%; max-width:100%;") %>
+    </div>
+
+    <%= f.label(:category, "Категория", :class => "control-label") %>
+    <div class="controls">
+      <%= f.select :category_id, @categories%>
+    </div>
+
+    <%= f.label(:description, "Описание", :class => "control-label") %>
+    <div class="controls">
+      <%= f.text_area(:description, :rows => 1, :style => "width:100%; max-width:100%;") %>
+    </div>
+  </div>
+  <%= f.submit "Сохранить свойства", :disable_with => "Подождите...", :class => "btn btn-primary", :style => "float:right;" %>
+<% end %>

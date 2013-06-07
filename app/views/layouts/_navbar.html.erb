@@ -9,19 +9,38 @@
       <a class="brand" href="/">rExamination</a>
         <div class="nav-collapse collapse">
           <ul class="nav">
-              <li><a href="/">Панель</a></li>
+            <li><a href="/">Панель</a></li>
           </ul>
-           <ul class="nav" role="navigation">
-             <li class="dropdown">
+          <ul class="nav" role="navigation">
+          <% if !current_user.nil? and current_user.admin? %>
+            <li class="dropdown">
+              <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Администрирование<b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                <li><%= link_to "Экзамены", admin_root_path %></li>
+                <li><%= link_to "Вендоры", admin_vendors_path %></li>
+                <li><%= link_to "Категории", admin_categories_path %></li>
+                <li><%= link_to "Пользователи", admin_users_path %></li>
+                <li class="divider"></li>
+                <li><a tabindex="-1" href="/rAdmin" data-toggle="modal">Rails Admin</a></li>
+              </ul>
+            </li>
+          <% end %>
+            <li class="dropdown">
                <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Помощь<b class="caret"></b></a>
-                 <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                   <li><a tabindex="-1" href=>Справка</a></li>
-                   <li class="divider"></li>
-                   <li><a tabindex="-1" href="#aboutModal" data-toggle="modal">О программе</a></li>
-                   <li><a tabindex="-1" href=/TODO.html>TODO</a></li>
-                 </ul>
+               <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                 <li><a tabindex="-1" href=>Справка</a></li>
+                 <li class="divider"></li>
+                 <li><a tabindex="-1" href="#aboutModal" data-toggle="modal">О программе</a></li>
+               </ul>
              </li>
            </ul>
+          </div>
+          <div style="color: #999; display:block;float: right; padding:10px 20px 10px;" class="nav">
+            <% if user_signed_in? %>
+              Вы вошли как <%= link_to current_user.username, profile_path(current_user.username) %> (<%= link_to "выйти", destroy_user_session_path, :method => :delete %>)
+            <% else %>
+              <%= link_to 'Войти', new_user_session_path if !user_signed_in? %>
+            <% end %>
           </div>
       </div><!--/.nav-collapse -->
      </div>

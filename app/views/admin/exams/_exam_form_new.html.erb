@@ -1,0 +1,41 @@
+<%= form_for([:admin, @exam], :html => { :class => "form-horizontal" }) do |f| %>
+  <% if @exam.errors.any? %>
+    <div id="error_explanation" class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <h2>Исправьте пожалуйста <%= @exam.errors.size %> <%= Russian.p(@exam.errors.size, "ошибка","ошибки","ошибок") %></h2>
+      <ul>
+      <% @exam.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<div class="control-group">
+  <%= f.label(:title, "Название", :class => "control-label") %>
+  <div class="controls">
+    <%= f.text_field(:title, :style => "background-color: transparent;", :class => "input-xxlarge") %>
+  </div>
+
+  <%= f.label(:number, "Номер", :class => "control-label") %>
+  <div class="controls">
+    <%= f.text_field(:number, :style => "background-color: transparent;") %>
+  </div>
+
+  <%= f.label(:vendor, "Вендор", :class => "control-label") %>
+  <div class="controls">
+    <%= f.select(:vendor_id, Vendor.all.map { |v| [v.title, v.id] }, :prompt => "Выберите вендора", :rows => 1, :style => "width:100%; max-width:100%;") %>
+  </div>
+
+  <%= f.label(:category, "Категория", :class => "control-label") %>
+  <div class="controls">
+    <%= f.select :category_id, @categories, :filteringselect => true %>
+  </div>
+
+  <p>
+  <div class="controls">
+    <%= f.submit "Сохранить", :class => "btm btn-primary" %>
+  </div>
+</div>
+<% end %>

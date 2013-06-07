@@ -1,0 +1,34 @@
+<div class="control-group">
+  <%= label_tag(:count, "Количество вариантов", :class => "control-label") %>
+  <div class="controls">
+    <%= text_field_tag('count', @question.answers.count, :style => "background-color: transparent;", :disabled => true) %>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= label_tag(:allow_mix, "Разрешить перемешивание", :class => "control-label") %>
+  <div class="controls">
+    <%= select_tag('allow_mix', options_for_select([['Включено','true'],['Выключено','false']],@question.allow_mix), :style => "background-color: transparent;") %>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= label_tag(:section, "Секция", :class => "control-label") %>
+  <div class="controls">
+    <%= select_tag('section', options_for_select(@exam.sections.map { |s| [s.title, s.id] }, @question.section_id), :style => "background-color: transparent;") %>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= label_tag(:difficult, "Сложность", :class => "control-label") %>
+  <div class="controls">
+    <%= text_field_tag('difficult', @question.difficult, :style => "background-color: transparent;") %>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= label_tag(:type, "Тип ответа", :class => "control-label") %>
+  <div class="controls">
+    <%= select_tag('type', options_for_select(Type.all.map { |s| [s.title, s.id] }, @question.type_id), :style => "background-color: transparent;") %>
+  </div>
+</div>

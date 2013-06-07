@@ -1,0 +1,21 @@
+<%= form_tag(admin_exam_section_path(@exam), :method => :put, :class => "form-horizontal")  do %>
+
+  <div>
+    <div style="float: left;"><strong>Секции</strong></div>
+    <div style="float: right;"><a style="cursor: pointer;" onClick="addSection()">добавить секцию <i class="icon-plus-sign"></i></a></div>
+  </div><hr>
+    <ol>
+  <span id="sections">
+      <% @sections.each do |section| %>
+      <div>
+        <li><%= text_field_tag "section["+section.id.to_s+"]", section.title %> (<a title="Кол-во вопросов в секции"><%= section.questions.size %></a>)
+          <a style="cursor: pointer;" title="Удалить секцию" onclick="if (confirm('Вы действительно хотите удалить секцию?\nВсе ответы, принадлежащие секции будут удалены!')) { this.parentNode.parentNode.removeChild(this.parentNode); }"><i class="icon-minus-sign"></i></a></li>
+      </div>
+    <% end %>
+  </span>
+    </ol>
+
+  <%= button_tag 'Отменить', :type => "reset", :class => "btn btn-primary", :style => "float:left;" %>
+  <%= button_tag "Сохранить", :class => "btn btn-primary", :style => "float:right;" %>
+
+<% end %>

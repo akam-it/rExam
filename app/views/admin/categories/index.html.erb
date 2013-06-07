@@ -1,0 +1,16 @@
+<h3><%= @title %></h3>
+<%= button_to "Добавить категорию", new_admin_category_path, :class => "btn btn-primary", :method => "get" %>
+<ul>
+<% Category.roots.each do |cat_root| %>
+  <li><%= cat_root.title %> (<%= link_to "<i class='icon-edit'></i>".html_safe, edit_admin_category_path(cat_root) %>
+                             <%= link_to "<i class='icon-trash'></i>".html_safe, admin_category_path(cat_root), :method => :delete, :confirm => "Вы уверены?" %>)</li>
+    <% unless cat_root.children.empty? %>
+  <ul>
+  <% cat_root.children.each do |cat_child| %>
+    <li><%= cat_child.title %> (<%= link_to "<i class='icon-edit'></i>".html_safe, edit_admin_category_path(cat_child) %>
+                                <%= link_to "<i class='icon-trash'></i>".html_safe, admin_category_path(cat_child), :method => :delete, :confirm => "Вы уверены?" %>)</li>
+  <% end %>
+  </ul>
+  <% end %>
+  <% end %>
+</ul>

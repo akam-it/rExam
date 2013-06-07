@@ -1,0 +1,18 @@
+<h3><%= @title %></h3>
+<%= link_to "Добавить экзамен", new_admin_exam_path, :class => "btn btn-primary" %>
+<%= link_to "Импортировать экзамен", import_admin_exams_path, :class => "btn btn-primary" %>
+
+<table class="table table-hover">
+  <thead>
+    <tr><th width=10>#<th>Exam<th>Actions
+  </thead>
+  <tbody>
+     <% @exams.each.with_index(1) do |exam,index| %>
+       <tr>
+         <td><%= index %>
+         <td><%= exam.title %>
+         <td><%= link_to "<i class='icon-edit'></i>".html_safe, edit_admin_exam_path(exam) %>
+             <%= link_to "<i class='icon-trash'></i>".html_safe, admin_exam_path(exam), :method => :delete, :confirm => "Вы уверены?" %>
+     <% end %>
+  </tbody>
+</table>

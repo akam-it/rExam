@@ -1,0 +1,16 @@
+<h3><%= @title %></h3>
+<%= button_to "Добавить вендора", new_admin_vendor_path, :class => "btn btn-primary", :method => "get" %>
+
+<table class="table table-hover">
+  <thead>
+    <tr><th width=10>#<th>Vendor<th>Actions
+  </thead>
+  <tbody>
+     <% @vendors.each_with_index do |vendor,index| %>
+       <tr>
+         <td><%= index+1 %>
+         <td><%= vendor.title %>
+         <td><%= link_to "<i class='icon-edit'></i>".html_safe, edit_admin_vendor_path(vendor) %> <%= link_to "<i class='icon-trash'></i>".html_safe, admin_vendor_path(vendor), :method => :delete, :confirm => "Вы уверены?" %>
+     <% end %>
+  </tbody>
+</table>

@@ -9,6 +9,7 @@ class ExamsController < ApplicationController
   def show
     @exam = Exam.find(params[:id])
     @title = @exam.title
+    @MAX_scores = @exam.questions.pluck(:difficult).inject{|sum,x| sum + x }
   end
 
   def prepare
@@ -48,6 +49,10 @@ class ExamsController < ApplicationController
     when 2
       session[:answer][current_que] = answer.map(&:to_i)
     end
+    render :nothing => true
+    #respond_to do |format|
+    #  format.html {}
+    #end
   end
 
   def start
@@ -71,11 +76,9 @@ class ExamsController < ApplicationController
     @exam = Exam.find(params[:id])
     @title = "Результаты тестирования"
     @questions = Question.where(:id => session[:random_ids])
+    @sections = Section.where(:id => @questions.pluck(:section_id).uniq)
     @score = 0
-    @score_max = 0
-    @questions.each do |q|
-      @score_max += q.difficult
-    end
+    @score_max = @questions.pluck(:difficult).inject{|sum,x| sum + x }
     @correctCount = 0
     r = Result.where(:session_id => session[:session_id], :user_id => 0, :exam_id => params[:id], :try => session[:try])
     if r.count > 0

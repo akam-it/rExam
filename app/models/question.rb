@@ -4,7 +4,7 @@ class Question < ActiveRecord::Base
   belongs_to :type
   belongs_to :section
   has_many   :results
-  has_many   :answers
+  has_many   :answers, :dependent => :destroy
 
   validates_associated  :type
   validates_presence_of :type
@@ -14,5 +14,5 @@ class Question < ActiveRecord::Base
             :length => { :minimum => 3 }
   validates :allow_mix, :inclusion => {:in => [true, false]}
   validates :difficult, :presence => true,
-            :numericality => { :only_integer => true, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 5 }
+            :numericality => { :only_integer => true, :greater_than_or_equal_to => 1, :less_than_or_equal_to => 10 }
 end

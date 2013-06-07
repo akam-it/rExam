@@ -54,11 +54,11 @@
     </tr>
   </thead>
   <tbody>
-<% @exam.sections.each do |section| %>
+<% @sections.each do |section| %>
   <tr>
     <td><%= section.title %>
-    <td><%= section.questions.size %>
-    <td><%= section.questions.size > 0 ? @result.select { |r| (r.question.section.id == section.id and r["is_correct"] == true) }.size * 100 / section.questions.size : 0 %>%
+    <td><%= @questions.where(:section_id => section.id).size %>
+    <td><%= @questions.where(:section_id => section.id).size > 0 ? @result.select { |r| (r.question.section.id == section.id and r["is_correct"] == true) }.size * 100 / @questions.where(:section_id => section.id).size : 0 %>%
 <% end %>
   </tbody>
 </table>

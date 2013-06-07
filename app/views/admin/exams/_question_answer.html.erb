@@ -1,0 +1,10 @@
+<div class="inline form-inline">
+  <% case @question.type_id
+  when 1 %>
+    <%= radio_button_tag "correct_answer[]", answer.id, answer.is_correct?, :style => "width: 20px; height: 20px;" %>
+  <% when 2 %>
+    <%= check_box_tag "correct_answer[]", answer.id || 'new', answer.is_correct?, :style => "width: 20px; height: 20px;" %>
+  <% end %>
+  <%= text_area_tag "answer["+answer.id.to_s+"]", answer.title, :rows => 1, :style => "width:92%; max-width:92%; padding:5px; overflow:auto; height:auto;" %>
+  <a style="cursor: pointer;" title="Удалить ответ" onclick="this.parentNode.parentNode.removeChild(this.parentNode);"><i class="icon-minus-sign"></i></a>
+</div>

@@ -1,0 +1,56 @@
+<%= form_for(@user, :html => { :class => "form-horizontal" }) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation" class="alert alert-error">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <label class="control-label" for="user_username">Username</label>
+    <div class="controls">
+      <%= f.text_field :username %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="user_email">Email</label>
+    <div class="controls">
+      <%= f.text_field :email %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="user_password">Password</label>
+    <div class="controls">
+      <%= f.password_field :password %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="user_password">Password Confirmation</label>
+    <div class="controls">
+      <%= f.password_field :password_confirmation %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="user_admin">Администратор?</label>
+    <div class="controls">
+      <%= f.check_box :admin %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <%= f.submit "Сохранить" %>
+    </div>
+  </div>
+
+  <%= link_to "<<< Назад", :back %>
+<% end %>

@@ -1,0 +1,36 @@
+<h3><%= @title %></h3>
+
+<%= render 'exam' %>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+<script language="javascript">
+// TODO: Только если форма изменена и чтобы работало с аяксом
+window.onbeforeunload = function (evt) {
+  var message = "Данные не сохранены.";
+  if (typeof evt == "undefined") {
+    evt = window.event;
+  }
+  if (evt) {
+    evt.returnValue = message;
+  }
+  //return message;
+}
+
+<% if @questions.size > 0 %>
+function addAnswer() {
+  $('#answers').append("<%= ((((((render 'question_answer', :answer => Answer.create)
+    .gsub /\n/, '')
+    .gsub /\"/, '\'')
+    .gsub /name=\'answer\[/, 'name=\'new_answer[')
+    .gsub /(style='.*20px\;)'/, '\\1 visibility: hidden;\'')
+    .gsub /(<.*name=\'correct_answer.*\/)>/, '\\1 disabled>')
+    .html_safe %>");
+}
+<% end %>
+
+function addSection() {
+  $('#sections').append("<div><li><input id='new_section[]' name='new_section[]' type='text' value='' /> (<a title='Кол-во вопросов в секции'>0</a>) <a style='cursor: pointer;' title='Удалить секцию' onclick=\"if (confirm('Вы действительно хотите удалить секцию?\\nВсе ответы, принадлежащие секции будут удалены!')) { this.parentNode.parentNode.removeChild(this.parentNode); }\"><i class='icon-minus-sign'></i></a></li></div>");
+}
+</script>

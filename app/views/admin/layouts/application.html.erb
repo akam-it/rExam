@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title><%= title %></title>
+<%= stylesheet_link_tag    "application", :media => "all" %>
+<%= javascript_include_tag "application" %>
+<%= javascript_include_tag "highcharts" %>
+<%= javascript_include_tag "exporting" %>
+<%= javascript_include_tag "jquery.countdown.min" %>
+<%= csrf_meta_tags %>
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+</head>
+<body>
+    <%= render :partial => 'layouts/about' %>
+    <%= render :partial => 'layouts/navbar' %>
+
+    <div class="container">
+      <%= render :partial => 'layouts/flashes' %>
+      <%= yield %>
+      <div class="footer">
+        <%= render :partial => 'layouts/footer' %>
+      </div>
+    </div>
+
+</body>
+</html>
+

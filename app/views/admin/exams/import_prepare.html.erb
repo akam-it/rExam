@@ -1,0 +1,59 @@
+<h2><%= @title %></h2>
+<h4>Предварительный просмотр экзамена</h4>
+
+<table class="table table-striped table-hover">
+  <tr>
+    <th>Формат
+    <td><%= @vce[:format_type] == "85a8" ? "VCE (0x85a8)" : "ERROR" %>
+  <tr>
+    <th>Версия формата
+    <td><%= @vce[:format_version] %>
+  <tr>
+    <th>Тип экзамена
+    <td><%= @vce[:exam_type] == "00" ? "Стандартный экзамен" : "Экзамен на основе ситуации" %>
+  <tr>
+    <th>Номер экзамена
+    <td><%= @vce[:exam_number] %>
+  <tr>
+    <th>Название экзамена
+    <td><%= @vce[:exam_title] %>
+  <tr>
+    <th>Проходной балл
+    <td><%= @vce[:exam_passcore] %>
+  <tr>
+    <th>Лимит времени
+    <td><%= @vce[:exam_timelimit] %>
+  <tr>
+    <th>Версия экзамена
+    <td><%= @vce[:exam_version] %>
+  <tr>
+    <th>Дата создания
+    <td><%= @vce[:create_date] %>
+  <tr>
+    <th>Дата модификации
+    <td><%= @vce[:modify_date] %>
+  <tr>
+    <th>Описание экзамена
+    <td><%= @vce[:exam_description] %>
+  <tr>
+    <th>Количество подэкзаменов
+    <td><%= @vce[:exams_count].to_i %>
+</table>
+
+<div class="accordion-group">
+  <div class="accordion-heading"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Секции (<%= @vce[:section_qty] %>)</a></div>
+  <div id="collapseOne" class="accordion-body collapse">
+    <div class="accordion-inner">
+      <ol>
+        <% @sections.each do |section| %>
+          <li><%= section[:title] %>
+        <% end %>
+      <ol>
+    </div>
+  </div>
+</div>
+
+<%= form_tag(import_admin_exams_path, :multipart => true, :method => :put) do %>
+  <%= hidden_field_tag "vceFile", @vceFile.path %>
+  <%= submit_tag "Начать импорт", :class => "btn-block btn btn-large btn-primary" %>
+<% end %>

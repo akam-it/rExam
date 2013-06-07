@@ -24,7 +24,12 @@ jQuery(function($) {
     compact: true,
     format: 'HMs',
     description: '',
-    onExpiry: function() { alert('Время вышло!'); document.getElementById('finish').click(); }
+    onExpiry: function() {
+      document.getElementById('next').disable();
+      document.getElementById('prev').disable();
+      alert('Время вышло!');
+      document.getElementById('finish').click();
+    }
   });
 
 });
